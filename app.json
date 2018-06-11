@@ -1,0 +1,26 @@
+{
+  "id": "fc6df0b5-53e3-43a2-b538-35df4f62e8ac",
+  "name": "Seminar Module",
+  "publisher": "D. E. Veloper",
+  "brief": "",
+  "description": "",
+  "version": "1.0.0.0",
+  "compatibilityId": "1.0.0.0",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "capabilities": [],
+  "dependencies": [],
+  "screenshots": [],
+  "showMyCode": true,
+  "target": "Internal",
+  "features": "TranslationFile",
+  "platform": "11.0.0.0",
+  "application": "11.0.0.0",
+  "idRange": {
+    "from": 123456700,
+    "to": 123456799
+  }
+}
