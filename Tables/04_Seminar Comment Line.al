@@ -21,7 +21,7 @@ table 123456704 "Seminar Comment Line"
         field(30;"No.";Code[20])
         {
             Caption='No.';
-            TableRelation=if ("Table Name"=const(Seminar)) "Seminar";
+            TableRelation=if ("Table Name"=const(Seminar)) "Seminar" else if ("Table Name"=const("Seminar Registration Header")) "Seminar Registration Header";
         }
         field(40;"Line No.";Integer)
         {

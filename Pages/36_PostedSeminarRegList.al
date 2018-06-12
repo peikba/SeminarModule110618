@@ -1,17 +1,15 @@
-page 123456713 "Seminar Registration List"
+page 123456736 "Posted Seminar Reg. List"
 {
-     // CSD1.00 - 2018-01-01 - D. E. Veloper
-    //   Chapter 6 - Lab 3
+    // CSD1.00 - 2018-01-01 - D. E. Veloper
+    //   Chapter 7 - Lab 3
     //     - Created new page
-    //   Chapter 7 - Lab 5-8
-    //     - Added Post Action  
 
-    Caption = 'Seminar Registration List';
-    CardPageID = "Seminar Registration";
+    Caption = 'Posted Seminar Registration List';
+    CardPageID = "Posted Seminar Registration";
     Editable = false;
     PageType = List;
-    SourceTable = "Seminar Registration Header";
-    UsageCategory=lists;
+    SourceTable = "Posted Seminar Reg. Header";
+    UsageCategory=Documents;
 
     layout
     {
@@ -40,13 +38,17 @@ page 123456713 "Seminar Registration List"
                 field("Maximum Participants";"Maximum Participants")
                 {
                 }
-                field("Room Resource Code";"Room Resource No.")
+                field("Room Resource No.";"Room Resource No.")
                 {
                 }
             }
         }
         area(factboxes)
         {
+            part("Seminar Details FactBox";"Seminar Details FactBox")
+            {
+                SubPageLink = "No."=Field("Seminar No.");
+            }
             systempart("Links";Links)
             {
             }
@@ -67,28 +69,36 @@ page 123456713 "Seminar Registration List"
                 {
                     Caption = 'Co&mments';
                     Image = Comment;
-                    RunObject = Page 123456706;
+                    RunObject = Page "Seminar Comment List";
                     RunPageLink = "No."=Field("No.");
-                    RunPageView = where("Table Name"=const("Seminar Registration Header"));
+                    RunPageView = where("Table Name"=const("Posted Seminar Reg. Header"));
                 }
                 action("&Charges")
                 {
                     Caption = '&Charges';
                     Image = Costs;
-                    RunObject = Page 123456724;
+                    RunObject = Page 123456739;
                     RunPageLink = "Document No."=Field("No.");
                 }
-                action("&Post")
-                {
-                    Caption='&Post';
-                    Image=PostDocument;
-                    Promoted=true;
-                    PromotedIsBig=true;
-                    PromotedCategory=Process;
-                    ShortcutKey=F9;
-                    RunObject=codeunit "Seminar-Post (Yes/No)";
-                }
             }
+        }
+        area(Processing)
+        {
+            action("&Navigate")
+            {
+                Caption='&Navigate';
+                Image=Navigate;
+                Promoted=true;
+                PromotedCategory=Process;
+
+                trigger OnAction();
+                var
+                    Navigate : page Navigate;
+                begin
+                    Navigate.SetDoc("Posting Date","No.");
+                    Navigate.RUN;
+                end;
+            }        
         }
     }
 }
