@@ -5,6 +5,8 @@ table 123456710 "Seminar Registration Header"
     //     - Created new table
     //   Chapter 8 - Lab 2-3
     //     - Added LookupId and DrillDownPageId
+    //   Chapter 9 - Lab 1-1
+    //     - Added Field "No. Printed"
     Caption = 'Seminar Registration Header';
     LookupPageId="Posted Seminar Reg. List";
     DrillDownPageId="Posted Seminar Reg. List";
@@ -291,6 +293,11 @@ table 123456710 "Seminar Registration Header"
         {
             Caption = 'Posting No.';
         }
+        field(40;"No. Printed";Integer)
+        {
+            Caption='No. Printed';
+            Editable=false;
+        }
     }
 
     keys
@@ -315,6 +322,7 @@ table 123456710 "Seminar Registration Header"
         SeminarSetup: Record "Seminar Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         AllowDelete : Boolean;
+
         Text001 : Label 'You cannot delete the Seminar Registration, because there is at least one %1 where %2=%3.';
         Text002 : Label 'You cannot change the %1, because there is at least one %2 with %3=%4.';
         Text004: Label 'This Seminar is for %1 participants. \The selected Room has a maximum of %2 participants \Do you want to change %3 for the Seminar from %4 to %5?';
@@ -371,11 +379,11 @@ table 123456710 "Seminar Registration Header"
         SeminarSetup.Get;
         NoSeriesMgt.SetDefaultSeries("Posting No. Series", SeminarSetup."Posted Seminar Reg. Nos.");
     end;
-    procedure SetAllowDelete(inAllowDelete : Boolean);
-    begin
-        AllowDelete:=inAllowDelete;
-    end;
 
+procedure SetAllowDelete(inAllowDelete : Boolean);
+begin
+    AllowDelete:=inAllowDelete;    
+end;
     procedure AssistEdit(OldSeminarRegHeader: Record "Seminar Registration Header"): Boolean;
     begin
         with SeminarRegHeader do
